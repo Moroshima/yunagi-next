@@ -139,42 +139,47 @@ homebrew-cask-versions tap 源同理，但一般不常使用
 
 ### Recommanded Packages
 
-| Name                    | Description                                                               | Note |
-| ----------------------- | ------------------------------------------------------------------------- | ---- |
-| b2sum                   |                                                                           |      |
-| bottom                  | Yet another cross-platform graphical process/system monitor               |      |
-| deno                    |                                                                           |      |
-| emacs                   |                                                                           |      |
-| fastfetch               |                                                                           |      |
-| ffmpeg                  |                                                                           |      |
-| git                     |                                                                           |      |
-| gnupg                   |                                                                           |      |
-| htop                    |                                                                           |      |
+| Name                    | Description                                                  | Note |
+| ----------------------- | ------------------------------------------------------------ | ---- |
+| b2sum                   |                                                              |      |
+| bottom                  | Yet another cross-platform graphical process/system monitor  |      |
+| *cmake                  |                                                              |      |
+| deno                    |                                                              |      |
+| emacs                   |                                                              |      |
+| fastfetch               |                                                              |      |
+| ffmpeg                  |                                                              |      |
+| git                     |                                                              |      |
+| gnupg                   |                                                              |      |
+| htop                    |                                                              |      |
 | hwloc                   | Portable abstraction of the hierarchical topology of modern architectures |      |
-| iproute2mac             | CLI wrapper for basic network utilities on macOS - ip command             |      |
-| lua                     |                                                                           |      |
-| lz4                     | Extremely Fast Compression algorithm                                      |      |
-| nvm                     |                                                                           |      |
-| perl                    |                                                                           |      |
-| pnpm                    |                                                                           |      |
-| pstree                  | Show ps output as a tree                                                  |      |
-| qemu                    |                                                                           |      |
-| ripgrep                 | Search tool like grep and The Silver Searcher                             |      |
-| ruby                    |                                                                           |      |
-| smartmontools           |                                                                           |      |
-| starship                |                                                                           |      |
-| stow                    |                                                                           |      |
-| stress                  |                                                                           |      |
-| tmux                    |                                                                           |      |
-| tree                    |                                                                           |      |
-| uptimed                 |                                                                           |      |
-| wget                    |                                                                           |      |
-| woff2                   | Utilities to create and convert Web Open Font File (WOFF) files           |      |
-| yarn                    |                                                                           |      |
-| zsh-autosuggestions     | Fish-like fast/unobtrusive autosuggestions for zsh                        |      |
-| zsh-completions         |                                                                           |      |
-| zsh-syntax-highlighting | Fish shell like syntax highlighting for zsh                               |      |
-| zstd                    | Zstandard is a real-time compression algorithm                            |      |
+| iproute2mac             | CLI wrapper for basic network utilities on macOS - ip command |      |
+| *libtool                |                                                              |      |
+| lua                     |                                                              |      |
+| lz4                     | Extremely Fast Compression algorithm                         |      |
+| *macism                 |                                                              |      |
+| nvm                     |                                                              |      |
+| perl                    |                                                              |      |
+| pnpm                    |                                                              |      |
+| pstree                  | Show ps output as a tree                                     |      |
+| qemu                    |                                                              |      |
+| ripgrep                 | Search tool like grep and The Silver Searcher                |      |
+| ruby                    |                                                              |      |
+| *rustup-init            |                                                              |      |
+| *sbcl                   |                                                              |      |
+| smartmontools           |                                                              |      |
+| starship                |                                                              |      |
+| stow                    |                                                              |      |
+| stress                  |                                                              |      |
+| tmux                    |                                                              |      |
+| tree                    |                                                              |      |
+| uptimed                 |                                                              |      |
+| wget                    |                                                              |      |
+| woff2                   | Utilities to create and convert Web Open Font File (WOFF) files |      |
+| yarn                    |                                                              |      |
+| zsh-autosuggestions     | Fish-like fast/unobtrusive autosuggestions for zsh           |      |
+| zsh-completions         |                                                              |      |
+| zsh-syntax-highlighting | Fish shell like syntax highlighting for zsh                  |      |
+| zstd                    | Zstandard is a real-time compression algorithm               |      |
 
 #### One-click Installation
 

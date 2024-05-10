@@ -1,22 +1,16 @@
 import path from "path";
 import fs from "fs";
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkMath from "remark-math";
-import remarkRehype from "remark-rehype";
-import rehypeKatex from "rehype-katex";
-import rehypeStringify from "rehype-stringify";
 import { Metadata } from "next";
 import posts from "@/posts/posts.json";
 import { notFound } from "next/navigation";
 import Comment from "@/components/comment";
-import remarkGfm from "remark-gfm";
-import rehypeToc from "rehype-toc";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeSlug from "rehype-slug";
-import rehypeRaw from "rehype-raw";
-import rehypeShiki from "@shikijs/rehype";
-import rehypeMermaid from "rehype-mermaid";
+import markdownit from "markdown-it";
+import anchor from "markdown-it-anchor";
+import mathjax3 from "markdown-it-mathjax3";
+import shiki from "@shikijs/markdown-it";
+import tocDoneRight from "markdown-it-toc-done-right";
+import uslug from "uslug";
+import plantuml from "markdown-it-plantuml";
 
 let metadata: Metadata = {};
 
@@ -38,69 +32,46 @@ export default async function PostRender({
     `${params.slug}.md`
   );
 
-  const executablePath = () => {
-    switch (process.platform) {
-      case "darwin":
-        return "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"; // for my macOS device
-      case "linux":
-        return "/opt/google/chrome/google-chrome"; // for GitHub Actions Ubuntu
-      case "win32":
-        return "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
-    }
-  };
+  const markdown = [
+    "[TOC]\n",
+    fs
+      .readFileSync(filePath, "utf8")
+      .replace(/```plantuml\n[\s\S]*?\n```/g, (match) => {
+        // 移除每个块中的 ```plantuml 和 ``` 标记
+        return match.replace(/^\s*```plantuml\s*\n|\s*```\s*$/g, "");
+      }),
+  ].join("\n");
 
-  const markdown = fs.readFileSync(filePath, "utf8");
-  const html = await unified()
-    .use(remarkParse)
-    .use(remarkGfm)
-    .use(remarkMath)
-    .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeRaw)
-    .use(rehypeKatex)
-    // .use(rehypeMermaid, {
-    //   launchOptions: {
-    //     executablePath: () => {
-    //       switch (process.platform) {
-    //         case "darwin":
-    //           return "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"; // for my macOS device
-    //           break;
-    //         case "linux":
-    //           "/opt/google/chrome/google-chrome"; // for GitHub Actions Ubuntu
-    //           break;
-    //         case "win32":
-    //           "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
-    //           break;
-    //       } // for different devices
-    //     },
-    //   },
-    // })
-    // .use(rehypeMermaid, {
-    //   launchOptions: {
-    //     executablePath:
-    //       "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-    //   },
-    // })
-    .use(rehypeShiki, {
-      // or `theme` for a single theme
-      themes: {
-        light: "github-dark-default",
-        dark: "github-dark-default",
-      },
-    })
-    .use(rehypeSlug)
-    .use(rehypeToc, { headings: ["h2", "h3", "h4", "h5", "h6"] })
-    .use(rehypeAutolinkHeadings, {
-      behavior: "wrap",
-      test: ["h2", "h3", "h4", "h5", "h6"],
-    })
-
-    .use(rehypeStringify)
-    .process(markdown);
+  const md = markdownit({
+    // Enable HTML tags in source
+    html: true,
+    // Use '/' to close single tags (<br />).
+    // This is only for full CommonMark compatibility.
+    xhtmlOut: true,
+    // Autoconvert URL-like text to links
+    linkify: true,
+    // Enable some language-neutral replacement + quotes beautification
+    // For the full list of replacements, see https://github.com/markdown-it/markdown-it/blob/master/lib/rules_core/replacements.mjs
+    typographer: true,
+  })
+    .use(anchor)
+    .use(mathjax3)
+    .use(plantuml)
+    .use(
+      await shiki({
+        themes: {
+          light: "github-light-default",
+          dark: "github-dark-default",
+        },
+      })
+    )
+    .use(tocDoneRight, { slugify: uslug, level: 2 });
+  const result = md.render(markdown);
 
   return (
     <>
       <div>My Post: {params.slug}</div>
-      <div dangerouslySetInnerHTML={{ __html: html.toString() }} />
+      <div dangerouslySetInnerHTML={{ __html: result }}></div>
       <Comment />
     </>
   );

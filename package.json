@@ -11,31 +11,28 @@
   "dependencies": {
     "@giscus/react": "^3.0.0",
     "@primer/octicons-react": "^19.9.0",
-    "@shikijs/rehype": "^1.4.0",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18",
-    "rehype-autolink-headings": "^7.1.0",
-    "rehype-katex": "^7.0.0",
-    "rehype-mermaid": "^2.0.1",
-    "rehype-raw": "^7.0.0",
-    "rehype-slug": "^6.0.0",
-    "rehype-stringify": "^10.0.0",
-    "rehype-toc": "^3.0.2",
-    "remark-gfm": "^4.0.0",
-    "remark-math": "^6.0.0",
-    "remark-parse": "^11.0.0",
-    "remark-rehype": "^11.1.0",
-    "unified": "^11.0.4"
+    "react-dom": "^18"
   },
   "devDependencies": {
+    "@shikijs/markdown-it": "^1.4.0",
+    "@types/markdown-it": "^14.1.1",
+    "@types/markdown-it-plantuml": "^1.4.5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/uslug": "^1.0.4",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^8.6.7",
+    "markdown-it-mathjax3": "^4.3.2",
+    "markdown-it-plantuml": "^1.4.1",
+    "markdown-it-toc-done-right": "^4.2.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "uslug": "^1.0.4"
   }
 }
